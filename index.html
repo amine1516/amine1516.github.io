@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>صانع المواقع الذكي</title>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-FVVFGB779W"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-FVVFGB779W');
+  </script>
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8947868233372821" crossorigin="anonymous"></script>
+
+  <style>
+    body {
+      font-family: "Cairo", sans-serif;
+      background: linear-gradient(to right, #f2f2f2, #e0f7fa);
+      padding: 20px;
+      text-align: center;
+    }
+    h1 {
+      color: #00796b;
+    }
+    label, select, input {
+      margin: 10px 0;
+      display: block;
+      font-size: 1.1em;
+      width: 90%;
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    button {
+      background-color: #00796b;
+      color: white;
+      padding: 10px 25px;
+      font-size: 1.1em;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #005f56;
+    }
+    textarea {
+      width: 90%;
+      height: 200px;
+      margin-top: 20px;
+      font-family: monospace;
+    }
+    .step {
+      display: none;
+      margin-top: 30px;
+    }
+    .active {
+      display: block;
+    }
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #ccc;
+      margin: auto;
+      max-width: 500px;
+    }
+    footer {
+      margin-top: 30px;
+      font-size: 0.9em;
+      color: #555;
+    }
+    footer a {
+      color: #00796b;
+      margin: 0 8px;
+      cursor: pointer;
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 10;
+      padding: 50px;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.5);
+    }
+    .modal-content {
+      background-color: #fff;
+      margin: auto;
+      padding: 20px;
+      border-radius: 8px;
+      max-width: 600px;
+      text-align: right;
+    }
+    .close {
+      color: red;
+      float: left;
+      font-size: 24px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>🌐 صانع المواقع الذكي</h1>
+  <p>قم بتوليد موقع بسيط خاص بك بسهولة — أول تجربة مجانية!</p>
+
+  <!-- Step 1 -->
+  <div id="step1" class="step active">
+    <label>اسم الموقع:</label>
+    <input type="text" id="siteName" placeholder="مثلاً: موقعي الجميل" />
+    <button onclick="goToStep(2)">التالي</button>
+  </div>
+
+  <!-- Step 2 -->
+  <div id="step2" class="step">
+    <label>لون الخلفية:</label>
+    <input type="color" id="bgColor" />
+    <label>نوع الموقع:</label>
+    <select id="siteType">
+      <optgroup label="👤 شخصية / مهنية">
+        <option>موقع شخصي (CV)</option>
+        <option>سيرة ذاتية احترافية</option>
+        <option>شركة أو مؤسسة</option>
+      </optgroup>
+      <optgroup label="📰 إعلام ومحتوى">
+        <option>مدونة</option>
+        <option>موقع إخباري</option>
+        <option>موقع تعليمي</option>
+      </optgroup>
+      <optgroup label="📱 تقنية">
+        <option>أدوات / مولدات</option>
+        <option>تحويل صيغ</option>
+      </optgroup>
+      <optgroup label="🎨 فن">
+        <option>معرض صور</option>
+        <option>فيديو</option>
+      </optgroup>
+      <optgroup label="🛍 تجارة">
+        <option>متجر إلكتروني</option>
+        <option>وصفات طبخ</option>
+      </optgroup>
+      <optgroup label="⚙ متنوعة">
+        <option>موقع ديني</option>
+        <option>موقع ألعاب</option>
+      </optgroup>
+    </select>
+    <button onclick="goToStep(3)">التالي</button>
+  </div>
+
+  <!-- Step 3 -->
+  <div id="step3" class="step">
+    <div class="card">
+      <h2 id="resultTitle"></h2>
+      <p id="resultDesc"></p>
+      <textarea id="output" placeholder="سيظهر الكود هنا..."></textarea>
+      <br>
+      <button onclick="downloadCode()">📥 تحميل الموقع</button>
+      <button onclick="goToStep(1)">🔁 ابدأ من جديد</button>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>
+      <a onclick="openModal('privacy')">سياسة الخصوصية</a> |
+      <a onclick="openModal('terms')">اتفاقية الاستخدام</a> |
+      <a onclick="openModal('about')">من نحن</a> |
+      <a onclick="openModal('contact')">اتصل بنا</a> |
+      <a onclick="openModal('article')">مقال ثقافي</a>
+    </p>
+  </footer>
+
+  <!-- Modals -->
+  <div id="privacy" class="modal"><div class="modal-content"><span class="close" onclick="closeModal('privacy')">&times;</span><h3>سياسة الخصوصية</h3><p>لا نقوم بجمع أي بيانات شخصية دون إذن منك. يتم استخدام ملفات الكوكيز لتحسين تجربة التصفح فقط.</p></div></div>
+  <div id="terms" class="modal"><div class="modal-content"><span class="close" onclick="closeModal('terms')">&times;</span><h3>اتفاقية الاستخدام</h3><p>استخدامك لهذا الموقع يعني موافقتك على عدم نسخ المحتوى أو استغلاله بطريقة ضارة. نحتفظ بحق التعديل في الشروط.</p></div></div>
+  <div id="about" class="modal"><div class="modal-content"><span class="close" onclick="closeModal('about')">&times;</span><h3>من نحن</h3><p>نحن فريق عربي مستقل هدفنا تبسيط صناعة المواقع وتوفير أدوات تساعد المبتدئين على بناء حضور رقمي.</p></div></div>
+  <div id="contact" class="modal"><div class="modal-content"><span class="close" onclick="closeModal('contact')">&times;</span><h3>اتصل بنا</h3><p>📧 البريد: support@amine1516.github.io<br>📍 الجزائر</p></div></div>
+  <div id="article" class="modal"><div class="modal-content"><span class="close" onclick="closeModal('article')">&times;</span><h3>مقال: كيف تصنع موقعك بنفسك</h3><p>إنشاء موقع إلكتروني لم يعد أمرًا معقدًا كما كان في الماضي. بفضل أدوات مثل هذا المولد، يمكنك في دقائق إنشاء موقع بسيط خاص بك دون الحاجة لخبرة في البرمجة. اختر نوع الموقع، أضف اسمًا، حمّل الكود — وانطلق!</p></div></div>
+
+  <!-- Scripts -->
+  <script>
+    function goToStep(step) {
+      if (step === 2) {
+        const name = document.getElementById("siteName").value.trim();
+        if (!name) {
+          alert("من فضلك أدخل اسم الموقع.");
+          return;
+        }
+      }
+      if (step === 3) {
+        generateSite();
+        const name = document.getElementById('siteName').value;
+        const type = document.getElementById('siteType').value;
+        document.getElementById('resultTitle').textContent = `مرحبًا بك في "${name}"`;
+        document.getElementById('resultDesc').textContent = `نوع الموقع: ${type}`;
+      }
+      document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+      document.getElementById('step' + step).classList.add('active');
+    }
+
+    function generateSite() {
+      const name = document.getElementById('siteName').value || "موقعي";
+      const bg = document.getElementById('bgColor').value || "#ffffff";
+      const type = document.getElementById('siteType').value;
+
+      const code = `<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head><meta charset="UTF-8"><title>${name}</title>
+<style>body { background-color: ${bg}; font-family: sans-serif; text-align: center; padding: 20px; } h1 { color: #00796b; }</style></head>
+<body>
+<h1>مرحبًا بك في ${name}</h1>
+<p>نوع الموقع: ${type}</p>
+</body>
+</html>`;
+      document.getElementById('output').value = code;
+    }
+
+    function downloadCode() {
+      const code = document.getElementById('output').value;
+      const blob = new Blob([code], { type: 'text/html' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = "موقعي.html";
+      link.click();
+    }
+
+    function openModal(id) {
+      document.getElementById(id).style.display = "block";
+    }
+    function closeModal(id) {
+      document.getElementById(id).style.display = "none";
+    }
+  </script>
+</body>
+</html>
